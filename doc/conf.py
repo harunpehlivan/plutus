@@ -56,14 +56,13 @@ if on_rtd:
 primary_domain = 'hs'
 
 haddock_mapping = {}
-haddock_dir = os.getenv('SPHINX_HADDOCK_DIR', None)
-if haddock_dir:
-  for entry in os.scandir(haddock_dir):
-    if entry.is_dir():
-      html_dir = os.path.join(entry.path, 'html')
-      inv_file = os.path.join(html_dir, 'objects.inv')
-      if os.path.exists(inv_file):
-        haddock_mapping[entry.name] = (html_dir, inv_file)
+if haddock_dir := os.getenv('SPHINX_HADDOCK_DIR', None):
+    for entry in os.scandir(haddock_dir):
+      if entry.is_dir():
+        html_dir = os.path.join(entry.path, 'html')
+        inv_file = os.path.join(html_dir, 'objects.inv')
+        if os.path.exists(inv_file):
+          haddock_mapping[entry.name] = (html_dir, inv_file)
 
 intersphinx_mapping = haddock_mapping
 
